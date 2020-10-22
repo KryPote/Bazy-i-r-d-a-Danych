@@ -1,0 +1,1 @@
+alter table DEPARTMENTS ADD CONSTRAINT manager_id FOREIGN KEY (manager_id) REFERENCES EMPLOYEES(employee_id);
