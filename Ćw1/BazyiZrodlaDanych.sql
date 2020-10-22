@@ -1,0 +1,1 @@
+alter table COUNTRIES ADD CONSTRAINT region_id FOREIGN KEY (region_id) REFERENCES REGIONS(region_id);
