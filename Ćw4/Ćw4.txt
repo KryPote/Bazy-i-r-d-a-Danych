@@ -1,0 +1,62 @@
+1.
+declare
+    NUMBER_MAX NUMBER;
+    NEW_JOB_ID NUMBER;
+    NEW_DEPARTMENT_NAME DEPARTMENTS.DEPARTMENT_NAME%TYPE := 'EDUCATION';
+begin
+    select max(DEPARTMENT_ID) into NUMBER_MAX from DEPARTMENTS;
+    NEW_JOB_ID := NUMBER_MAX+10;
+    insert into DEPARTMENTS(department_id, DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
+    values(NEW_JOB_ID, NEW_DEPARTMENT_NAME, NULL, NULL);
+end;
+
+2.
+
+3.
+CREATE TABLE Table_3 (Column_1 VARCHAR(10))
+
+declare 
+    i number := 0;
+    
+begin
+    loop
+        i := i+1;
+        if i=4 or i=6 then
+            continue;
+        else 
+            insert into Table_3(Column_1)
+            values(i);
+        end if;
+        exit when i>=10;
+    end loop;
+end;
+
+4.
+declare 
+   COUNTRIES_INFO COUNTRIES%ROWTYPE;
+    
+begin 
+   select * into COUNTRIES_INFO from COUNTRIES where COUNTRY_ID = 'CA';
+end;
+
+5.
+
+6.
+
+7.
+declare 
+    cursor Seven is select 'SALARY', 'LAST_NAME' from EMPLOYEES where DEPARTMENT_ID = 50;
+    
+begin
+for cursor_row in Seven
+    loop
+        if cursor_row.SALARY > 3100 
+	then
+            dbms_output.put_line(cursor_row.LAST_NAME || ' nie dawaæ podwy¿ki');
+        else
+            dbms_output.put_line(cursor_row.LAST_NAME ||' daæ podwy¿kê');
+        end if;
+    end loop;
+close Seven;
+end;
+
