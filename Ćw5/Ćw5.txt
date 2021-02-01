@@ -1,0 +1,40 @@
+Wyzwalacze:
+1. 
+CREATE TABLE archiwum_departamentów(dep_id int primary key, dep_name varchar(300), close_date date, last_manager varchar(300));
+
+create or replace TRIGGER triggerpierwszy BEFORE DELETE ON DEPARTMENTS
+FOR EACH ROW DECLARE
+    emplo_name EMPLOYEES.FIRST_NAME%TYPE;
+    emplo_last EMPLOYEES.LAST_NAME%TYPE;
+    ost_menadzer archiwum_departamentów.last_manager%TYPE;
+
+
+BEGIN
+    SELECT EMPLOYEES.FIRST_NAME, EMPLOYEES.LAST_NAME into emplo_name, emplo_last FROM EMPLOYEES where EMPLOYEES.MANAGER_ID = :OLD.MANAGER_ID;
+    INSERT INTO archiwum_departamentów(dep_id, dep_name, close_date, last_manager) values(:old.DEPARTMENT_ID, :old.DEPARTMENT_NAME, SYSTIMESTAMP, concat(concat(emplo_name, '_'), emplo_last));
+    DBMS_OUTPUT.PUT_LINE('Zarchiwizowano');
+end;
+
+2.
+CREATE TABLE z³odziej(ID_zlodzieja int primary key, user_zlodziej varchar(300), czas_zmiany date);
+
+CREATE OR REPLACE TRIGGER triggerdrugi BEFORE INSERT OR UPDATE OF SALARY ON EMPLOYEES
+DECLARE
+    salary EMPLOYEES.SALARY%TYPE;
+
+BEGIN
+IF (salary <= 2000) OR (salary >= 26000) 
+    THEN INSERT INTO z³odziej VALUES(1,USER,SYSDATE);
+end if;
+end;
+
+3.
+
+4.
+CREATE OR REPLACE TRIGGER triggerczwarty BEFORE INSERT OR UPDATE OR DELETE ON JOB_GRADES
+FOR EACH ROW DECLARE 
+    event EXCEPTION;
+BEGIN
+    RAISE_APPLICATION_ERROR(-20500,'Zaprzestan');
+end;
+
