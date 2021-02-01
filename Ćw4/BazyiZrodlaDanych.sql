@@ -1,1 +1,7 @@
-CREATE TABLE archiwum_departamentów(dep_id int primary key, dep_name varchar, close_date date, last_manager varchar);
+CREATE OR REPLACE TRIGGER triggerczwarty BEFORE INSERT OR UPDATE OR DELETE ON JOB_GRADES
+FOR EACH ROW DECLARE 
+    event EXCEPTION;
+BEGIN
+    RAISE_APPLICATION_ERROR(-20500,'Zaprzestan');
+
+end;

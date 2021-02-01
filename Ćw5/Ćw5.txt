@@ -38,3 +38,39 @@ BEGIN
     RAISE_APPLICATION_ERROR(-20500,'Zaprzestan');
 end;
 
+Funkcje:
+1.
+
+2.
+
+3.
+
+4. 
+CREATE OR REPLACE FUNCTION funkcjacztery (wielka VARCHAR2)
+    RETURN VARCHAR2 IS temp VARCHAR2(100);
+BEGIN
+    temp := UPPER(SUBSTR(wielka, 1,1)) || SUBSTR(wielka,1) || UPPER(SUBSTR(wielka,-1));
+    return temp;
+END;
+
+5.
+  
+CREATE OR REPLACE FUNCTION funkcjapiec(PESEL VARCHAR2)
+    RETURN DATE IS uro DATE;
+BEGIN
+    
+    uro :=TO_DATE(SUBSTR(pesel,1,6),'yy-mm-dd');
+    return uro;
+END;
+
+6.
+CREATE OR REPLACE FUNCTION funkcjaszesc(nazwa_kraju VARCHAR2)
+    RETURN NUMBER IS count_1 NUMBER;
+BEGIN
+    DECLARE
+    lokacja LOCATIONS.COUNTRY_ID%TYPE;
+    
+    BEGIN
+    SELECT LOCATION_ID into lokacja from LOCATIONS where COUNTRY_ID = nazwa_kraju;
+    END;
+END;
